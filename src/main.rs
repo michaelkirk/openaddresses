@@ -15,6 +15,7 @@ mod chained_reader;
 use chained_reader::ChainedReader;
 
 fn main() -> Result<()> {
+    pretty_env_logger::init_timed();
     let args: Vec<_> = std::env::args().collect();
     let input_dir = Path::new(args.get(1).expect("required argument: <input dir>"));
 
@@ -40,11 +41,11 @@ fn main() -> Result<()> {
     let mut reader = GeoJsonLineReader::new(&mut input);
     let mut writer = FgbWriter::create(&stem.to_string_lossy(), GeometryType::Point)?;
 
-    eprintln!("start processing");
+    log::info!("start processing");
     reader.process(&mut writer)?;
-    eprintln!("done processing");
-    eprintln!("start writing");
+    log::info!("done processing");
+    log::info!("start writing");
     writer.write(&mut output)?;
-    eprintln!("done writing");
+    log::info!("done writing");
     Ok(())
 }

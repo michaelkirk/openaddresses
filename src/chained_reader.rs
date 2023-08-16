@@ -32,6 +32,7 @@ impl std::io::Read for ChainedReader {
             None => match self.paths.pop() {
                 None => Ok(0),
                 Some(next) => {
+                    log::debug!("Opening next reader: {next:?}");
                     self.current = Some(BufReader::new(File::open(next)?));
                     self.read(buf)
                 }
