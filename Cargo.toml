@@ -9,3 +9,6 @@ edition = "2021"
 flatgeobuf = "3.26.1"
 geozero = "0.10.0"
 
+[patch.crates-io]
+geozero = { git = "https://github.com/michaelkirk/geozero", branch = "mkirk/line-delimited-geojson" }
+
